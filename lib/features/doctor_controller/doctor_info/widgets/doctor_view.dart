@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use
 
+import 'package:admin/core/models/constant.dart';
 import 'package:admin/core/models/doctor_model.dart';
 
 import 'package:admin/features/doctor_controller/doctor_info/widgets/check_days.dart';
@@ -76,7 +77,7 @@ class DoctorView extends StatelessWidget {
                   radius: MediaQuery.textScalerOf(context).textScaleFactor * 50,
                   backgroundColor: Colors.white,
                   backgroundImage: NetworkImage(
-                    'http://192.168.1.106:5000${doctor.image}',
+                    Constants.ipAddress + doctor.image,
                   ),
                 ),
                 SizedBox(

@@ -1,6 +1,6 @@
+import 'package:admin/core/models/constant.dart';
 import 'package:admin/core/models/doctor_model.dart';
 import 'package:flutter/material.dart';
-
 
 class DoctorInfo extends StatelessWidget {
   const DoctorInfo({
@@ -25,8 +25,6 @@ class DoctorInfo extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-
-
             ///  image
             Positioned(
               top: 200,
@@ -35,7 +33,7 @@ class DoctorInfo extends StatelessWidget {
                   radius: 50,
                   backgroundColor: Colors.white,
                   backgroundImage: NetworkImage(
-                    'http://192.168.1.106:5000${doctor.image}',
+                    Constants.ipAddress + doctor.image,
                   )),
             ),
 

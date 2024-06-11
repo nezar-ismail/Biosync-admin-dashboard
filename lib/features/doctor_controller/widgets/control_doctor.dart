@@ -1,3 +1,4 @@
+import 'package:admin/core/models/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:admin/core/models/doctor_model.dart';
@@ -55,8 +56,7 @@ class DoctorCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
       child: ListTile(
         leading: CircleAvatar(
-          foregroundImage:
-              NetworkImage("http://192.168.1.106:5000${doctor.image}"),
+          foregroundImage: NetworkImage(Constants.ipAddress + doctor.image),
         ),
         title: Padding(
           padding: const EdgeInsets.only(left: 10),

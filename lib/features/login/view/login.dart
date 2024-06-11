@@ -64,7 +64,7 @@ class LoginBody extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
       if (state is LoginSuccess) {
         log(state.token);
-        bool result = readFileFromUSB("G", "token.txt", state.token);
+        bool result = readFileFromUSB("token.txt", state.token);
         if (result) {
           Navigator.pushReplacement(
               context,
@@ -85,7 +85,7 @@ class LoginBody extends StatelessWidget {
         }
       }
       if (state is LoginCubitEnterFlashMemory) {
-        bool result = readFileFromUSB("G", "token.txt", state.token);
+        bool result = readFileFromUSB("token.txt", state.token);
         if (result) {
           Navigator.pushReplacement(
               context,
@@ -147,8 +147,7 @@ class LoginBody extends StatelessWidget {
               child: Center(
                 child: IconButton(
                   onPressed: () {
-                    bool result =
-                        readFileFromUSB("G", "token.txt", state.token);
+                    bool result = readFileFromUSB("token.txt", state.token);
                     if (result) {
                       Navigator.pushReplacement(
                           context,
@@ -186,19 +185,24 @@ class LoginBody extends StatelessWidget {
     });
   }
 
-  bool readFileFromUSB(String driveLetter, String fileName, String token) {
-    try {
-      String filePath = '$driveLetter:\\$fileName';
-      File file = File(filePath);
-      String contents = file.readAsStringSync();
-      log('File Contents:');
-      log(contents);
-      if (contents == token) {
-        return true;
+  bool readFileFromUSB(String fileName, String token) {
+    for (int i = 65; i <= 90; i++) {
+      // ASCII values for 'A' to 'Z'
+      String driveLetter = String.fromCharCode(i);
+      try {
+        String filePath = '$driveLetter:\\$fileName';
+        File file = File(filePath);
+        String contents = file.readAsStringSync();
+        log('File Contents from $filePath:');
+        log(contents);
+        if (contents == token) {
+          return true;
+        }
+      } catch (e) {
+        // Continue to the next drive letter if there is an error
+        continue;
       }
-      return false;
-    } catch (e) {
-      return false;
     }
+    return false;
   }
 }

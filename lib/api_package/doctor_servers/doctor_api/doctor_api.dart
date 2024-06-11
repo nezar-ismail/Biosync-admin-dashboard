@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin/api_package/API/api.dart';
 import 'package:admin/core/models/constant.dart';
 import 'package:dio/dio.dart';
@@ -45,8 +47,10 @@ class DoctorAPI extends API {
             'specialization': specialization,
             'about': about,
             'gender': gender,
-            'experience': experience
+            'experience': experience,
+            'workday': workdays
           }));
+      log(response.data.toString());
       return response;
     } on DioException catch (e) {
       return e.response!;
